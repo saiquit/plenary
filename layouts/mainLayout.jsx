@@ -1,7 +1,7 @@
 import { mainNav } from '../configs/_nav';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styles from '../styles/layouts/MainLayout.module.css';
+import styles from '../styles/layouts/mainLayout.module.css';
 import Image from 'next/image';
 
 import { useState } from 'react';
@@ -27,7 +27,7 @@ const MainLayout = ({ children }) => {
                                 <Link href={nav.routeLink}>
                                     <a
                                         className={`nav-link mx-2 font-weight-bold  ${
-                                            activePath.title === nav.title
+                                            activePath?.title === nav.title
                                                 ? 'active text-white '
                                                 : ''
                                         }`}>

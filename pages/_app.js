@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import '../styles/scss/global.scss';
-import MainLayout from '../layouts/MainLayout';
-import AuthLayout from '../layouts/AuthLayout';
+import MainLayout from '../layouts/mainLayout';
+import AuthLayout from '../layouts/authLayout';
 import withRedux from 'next-redux-wrapper';
 import { withRouter } from 'next/router';
 import { Provider } from 'react-redux';
@@ -35,4 +35,5 @@ function MyApp({ Component, pageProps }) {
         </>
     );
 }
-export default wrapper.withRedux(MyApp);
+// export default wrapper.withRedux(MyApp);
+export default MyApp;

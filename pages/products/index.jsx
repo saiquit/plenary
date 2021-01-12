@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllItems } from '../../redux/items/itemActions';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getAllItems } from '../../redux/items/itemActions';
 
 const navItems = [
     {
@@ -15,8 +15,8 @@ const navItems = [
 ];
 
 const index = () => {
-    const dispatch = useDispatch();
-    const { items } = useSelector((state) => state.items);
+    // const dispatch = useDispatch();
+    // const { items } = useSelector((state) => state.items);
     const [active, setActive] = useState({
         index: 0,
         item: navItems[0]

@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
-import News from '../components/News';
-import Slider from '../components/Slider';
-import TabItems from '../components/TabItems';
-import styles from '../styles/Home.module.css';
+import News from '../components/news';
+import Slider from '../components/slider';
+import TabItems from '../components/tabItems';
+import styles from '../styles/home.module.css';
 
 export default function Home() {
     return (
