@@ -1,0 +1,9 @@
+.welcome_text h1 {
+    text-align: center;
+    margin-top: 43px;
+    font-size: 65px;
+}
+.welcome_text p {
+    text-align: center;
+    font-size: 18px;
+}

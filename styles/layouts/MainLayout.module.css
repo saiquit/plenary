@@ -1,0 +1,32 @@
+.main_header {
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+    height: 100px;
+    align-items: center;
+    /* margin-bottom: -64px; */
+    background-color: white;
+}
+.main_content {
+    background-color: #fff;
+}
+.logo {
+    background-color: white;
+    display: flex;
+    padding: 25px 7px;
+    border: 0px;
+}
+.nav_links {
+    float: right;
+    background-color: transparent;
+}
+.nav_link {
+    margin: 5px;
+    border-radius: 5px;
+}
+.nav_link a:hover {
+    color: red !important;
+}
+.nav_cover {
+    height: 80px;
+}

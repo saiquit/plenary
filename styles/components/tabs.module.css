@@ -1,0 +1,16 @@
+.icon {
+    border-radius: 30px;
+    border: 1px solid green;
+    width: 100%;
+    padding: 5px;
+    background-color: red;
+}
+.card_item {
+    width: 18rem;
+    transition: cubic-bezier(0.895, 0.03, 0.685, 0.22) 0.3s;
+    border-radius: 10px;
+}
+.card_item:hover {
+    box-shadow: 0px 3px 15px 3px forestgreen;
+    transform: scale(1.1);
+}
