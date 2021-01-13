@@ -21,7 +21,12 @@ const navItems = [
     {
         title: 'Home',
         key: 2,
-        child: []
+        child: [
+            {
+                title: 'Other 1',
+                key: 5
+            }
+        ]
     }
 ];
 
@@ -29,10 +34,9 @@ const index = () => {
     // const dispatch = useDispatch();
     // const { items } = useSelector((state) => state.items);
     const [active, setActive] = useState({
-        index: 0,
+        index: null,
         item: navItems[0]
     });
-    console.log(active);
     useEffect(() => {
         // dispatch(getAllItems(10));
         return () => {};
@@ -53,15 +57,27 @@ const index = () => {
                                         as={ListGroup}
                                         variant=""
                                         onClick={() =>
-                                            setActive({
-                                                index: i,
-                                                item: item
+                                            setActive((prevItem) => {
+                                                if (prevItem.index === i) {
+                                                    return {
+                                                        index: null,
+                                                        item: prevItem.item
+                                                    };
+                                                }
+                                                return {
+                                                    index: i,
+                                                    item
+                                                };
                                             })
                                         }
                                         className="flex-row justify-content-between align-items-center"
                                         eventKey={item.key}>
                                         {item.title}{' '}
-                                        <i hidden={!item.child.length} className="fa fa-plus"></i>
+                                        <i
+                                            hidden={!item.child.length}
+                                            className={`fa ${
+                                                i === active.index ? 'fa-minus' : 'fa-plus'
+                                            }`}></i>
                                     </Accordion.Toggle>
                                 </Card.Header>
                                 {item?.child.map((subItem, idx) => (
