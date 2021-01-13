@@ -1,16 +1,27 @@
 import { useEffect, useState } from 'react';
-import { Col, Container, ListGroup, Row } from 'react-bootstrap';
+import { Accordion, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { getAllItems } from '../../redux/items/itemActions';
 
 const navItems = [
     {
-        title: 'DashBoard',
-        key: 1
+        title: 'Ready To Cook',
+        key: 1,
+        child: [
+            {
+                title: 'Fish',
+                key: 3
+            },
+            {
+                title: 'others',
+                key: 4
+            }
+        ]
     },
     {
         title: 'Home',
-        key: 2
+        key: 2,
+        child: []
     }
 ];
 
@@ -21,6 +32,7 @@ const index = () => {
         index: 0,
         item: navItems[0]
     });
+    console.log(active);
     useEffect(() => {
         // dispatch(getAllItems(10));
         return () => {};
@@ -30,22 +42,50 @@ const index = () => {
         <Container>
             <Row className="my-5">
                 <Col md="4">
-                    <ListGroup as="ul">
-                        {navItems.map((item, i) => (
-                            <ListGroup.Item
-                                key={item.key}
-                                as="li"
-                                onClick={() =>
-                                    setActive({
-                                        index: i,
-                                        item: item
-                                    })
-                                }
-                                active={active.index === i}>
-                                {item.title}
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
+                    {navItems.map((item, i) => (
+                        <Accordion key={i} style={{ cursor: 'pointer' }}>
+                            <Card>
+                                <Card.Header
+                                    className={
+                                        item.key === active.item.key && `bg-secondary text-white`
+                                    }>
+                                    <Accordion.Toggle
+                                        as={ListGroup}
+                                        variant=""
+                                        onClick={() =>
+                                            setActive({
+                                                index: i,
+                                                item: item
+                                            })
+                                        }
+                                        className="flex-row justify-content-between align-items-center"
+                                        eventKey={item.key}>
+                                        {item.title}{' '}
+                                        <i hidden={!item.child.length} className="fa fa-plus"></i>
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                {item?.child.map((subItem, idx) => (
+                                    <Accordion.Collapse
+                                        className={
+                                            subItem.key === active.item.key &&
+                                            `bg-secondary text-white`
+                                        }
+                                        key={subItem.key}
+                                        eventKey={item.key}>
+                                        <Card.Body
+                                            onClick={() =>
+                                                setActive({
+                                                    index: idx,
+                                                    item: subItem
+                                                })
+                                            }>
+                                            {subItem.title}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                ))}
+                            </Card>
+                        </Accordion>
+                    ))}
                 </Col>
                 <Col md="8">col 1</Col>
             </Row>
