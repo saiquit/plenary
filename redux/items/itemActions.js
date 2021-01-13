@@ -1,32 +1,42 @@
-import { types } from "./itemTypes";
-import axios from "axios";
+import { types } from './itemTypes';
+// import axios from "axios";
+import sanityClient from '../../configs/client';
+// import BlockContent from '@sanity/block-content-to-react';
 
-export const getAllItems = (page_limit = null) => {
-  return async (dispatch) => {
-    dispatch({
-      type: types.ITEM_LOADING,
-    });
-    try {
-      if (page_limit) {
-        const { data } = await axios.get(
-          `http://localhost:8000/api/items?page_limit=${page_limit}`,
-        );
+// import imageUrlBuilder from '@sanity/image-url';
+
+// const builder = imageUrlBuilder(sanityClient);
+// function urlFor(source) {
+//     return builder.image(source);
+// }
+
+export const getAllItems = () => {
+    return async (dispatch) => {
         dispatch({
-          type: types.ITEM_SUCCESS_PAGE_LIMIT,
-          payload: data,
+            type: types.ITEM_LOADING
         });
-      } else {
-        const { data } = await axios.get("http://localhost:8000/api/items");
-        dispatch({
-          type: types.ITEM_SUCCESS,
-          payload: data,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: types.ITEM_FAILED,
-        payload: error.message,
-      });
-    }
-  };
+        try {
+            const data = await sanityClient.fetch(`*[_type=='product']{
+            title,
+            slug{
+                current
+            },
+            image{
+                asset->{
+              _id,
+              url
+             }
+            },
+        }`);
+            dispatch({
+                type: types.ITEM_SUCCESS,
+                payload: data
+            });
+        } catch (error) {
+            dispatch({
+                type: types.ITEM_FAILED,
+                payload: error.message
+            });
+        }
+    };
 };

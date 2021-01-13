@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Accordion, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getAllItems } from '../../redux/items/itemActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategories } from '../../redux/categories/categoryActions';
+import { getAllItems } from '../../redux/items/itemActions';
 
 const navItems = [
     {
@@ -13,32 +14,53 @@ const navItems = [
                 key: 3
             },
             {
-                title: 'others',
+                title: 'Others',
                 key: 4
             }
         ]
     },
     {
-        title: 'Home',
+        title: 'Fresh Fish',
         key: 2,
         child: [
             {
-                title: 'Other 1',
+                title: 'Fresh Fish',
                 key: 5
+            },
+
+            {
+                title: 'Sea Water',
+                key: 6
+            }
+        ]
+    },
+    {
+        title: 'Dried Fish',
+        key: 7,
+        child: [
+            {
+                title: 'Fresh Water',
+                key: 8
+            },
+            {
+                title: 'Sea Fish',
+                key: 9
             }
         ]
     }
 ];
 
 const index = () => {
-    // const dispatch = useDispatch();
-    // const { items } = useSelector((state) => state.items);
+    const dispatch = useDispatch();
+    const { items } = useSelector((state) => state.items);
+    const { categories } = useSelector((state) => state.categories);
     const [active, setActive] = useState({
         index: null,
         item: navItems[0]
     });
     useEffect(() => {
-        // dispatch(getAllItems(10));
+        dispatch(getAllItems());
+        dispatch(getAllCategories());
         return () => {};
     }, []);
 
@@ -76,7 +98,7 @@ const index = () => {
                                         <i
                                             hidden={!item.child.length}
                                             className={`fa ${
-                                                i === active.index ? 'fa-minus' : 'fa-plus'
+                                                i === active.index ? 'fa-angle-up' : 'fa-angle-down'
                                             }`}></i>
                                     </Accordion.Toggle>
                                 </Card.Header>
